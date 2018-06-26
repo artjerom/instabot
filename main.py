@@ -21,7 +21,7 @@ if __name__ == '__main__':
   main(urls)
   files = glob.glob('./images/*.jpg')
   if (len(files) >= len(urls)):
-    InstagramAPI = InstagramAPI('sapaDart', 'xaNokia81aB420x')
+    InstagramAPI = InstagramAPI('****', '****')
     InstagramAPI.login()
     for file in glob.glob('./images/*.jpg'):
       caption = "Подписывайся и ставь лайки"
