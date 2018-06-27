@@ -18,6 +18,7 @@ def main():
   # queue.join()
 
 if __name__ == '__main__':
+<<<<<<< HEAD
   main()
   # apiUrl = 'https://api.pinterest.com/v3/pidgets/boards/highquality/travel/pins/'
   # urls = createScopeLink(apiUrl)
@@ -29,4 +30,16 @@ if __name__ == '__main__':
     # for file in glob.glob('./images/*.jpg'):
       # caption = "Подписывайся и ставь лайки"
       # InstagramAPI.uploadPhoto(file, caption=caption)
+=======
+  apiUrl = 'https://api.pinterest.com/v3/pidgets/boards/highquality/travel/pins/'
+  urls = createScopeLink(apiUrl)
+  main(urls)
+  files = glob.glob('./images/*.jpg')
+  if (len(files) >= len(urls)):
+    InstagramAPI = InstagramAPI('****', '****')
+    InstagramAPI.login()
+    for file in glob.glob('./images/*.jpg'):
+      caption = "Подписывайся и ставь лайки"
+      InstagramAPI.uploadPhoto(file, caption=caption)
+>>>>>>> b5f6a4e17b0e7aa012eef6913d36773851fa7e3d
 
