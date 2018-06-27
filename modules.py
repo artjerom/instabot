@@ -1,5 +1,5 @@
-from urllib.request import Request, urlopen
-import os, json, threading
+from urllib.request import Request, urlopen, urlretrieve
+import os, json, threading, glob
 from queue import Queue
 from config import AUTH_HEADER_UNSPLASH
 
@@ -11,7 +11,7 @@ def getUnsplasLinks(url):
   with urlopen(q) as response:
     data = json.loads(response.read().decode())
   for pin in data:
-    result.append(pin['urls']['full'])
+    result.append(pin['urls']['thumb'])
   return result
 
 # dowland images from url
@@ -31,11 +31,13 @@ class Dowlander(threading.Thread):
       self.queue.task_done()
 
   def dowland_file(self, url):
-    handle = urllib.request.urlopen(url)
-    fname = os.path.basename(self.outFolderName + '/' + url)
-    with open(self.outFolderName + '/' + fname, 'wb') as f:
-      while True:
-        chunk = handle.read(1024)
-        if not chunk:
-          break
-        f.write(chunk)
+    count = len(glob.glob(self.outFolderName + '/*'))
+    urlretrieve(url, self.outFolderName + '/pic_' + str(count) + '.jpeg')
+    # handle = urlopen(url)
+    # fname = os.path.basename(self.outFolderName + '/' + url)
+    # with open(self.outFolderName + '/' + fname, 'wb') as f:
+      # while True:
+        # chunk = handle.read(1024)
+        # if not chunk:
+          # break
+        # f.write(chunk)
