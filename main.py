@@ -1,7 +1,6 @@
 from queue import Queue
 import glob, os
-from InstagramAPI import InstagramAPI
-from modules import getUnsplasLinks, Dowlander
+from modules import getUnsplasLinks, Dowlander, UploadPhotoToInstagram, setInterval
 import urllib
 
 def main(urls):
@@ -14,10 +13,15 @@ def main(urls):
     queue.put(url)
 
   queue.join()
+  files = glob.glob('./images/*')
+  for file in files:
+    print(file)
+    inst = UploadPhotoToInstagram(file)
+    inst.run()
 
 if __name__ == '__main__':
   urls = getUnsplasLinks('https://api.unsplash.com/collections/1538150/photos')
-  #urls = ["http://www.irs.gov/pub/irs-pdf/f1040.pdf","http://www.irs.gov/pub/irs-pdf/f1040a.pdf","http://www.irs.gov/pub/irs-pdf/f1040ez.pdf","http://www.irs.gov/pub/irs-pdf/f1040es.pdf","http://www.irs.gov/pub/irs-pdf/f1040sb.pdf"]
+
   main(urls)
   # apiUrl = 'https://api.pinterest.com/v3/pidgets/boards/highquality/travel/pins/'
   # urls = createScopeLink(apiUrl)
