@@ -32,12 +32,12 @@ class Dowlander(threading.Thread):
 
   def dowland_file(self, url):
     count = len(glob.glob(self.outFolderName + '/*'))
-    urlretrieve(url, self.outFolderName + '/pic_' + str(count) + '.jpeg')
-    # handle = urlopen(url)
-    # fname = os.path.basename(self.outFolderName + '/' + url)
-    # with open(self.outFolderName + '/' + fname, 'wb') as f:
-      # while True:
-        # chunk = handle.read(1024)
-        # if not chunk:
-          # break
-        # f.write(chunk)
+    #urlretrieve(url, self.outFolderName + '/pic_' + str(count) + '.jpeg')
+    handle = urlopen(url)
+    fname = os.path.basename(self.outFolderName + '/' + url)
+    with open(self.outFolderName + '/' + fname, 'wb') as f:
+      while True:
+        chunk = handle.read(1024)
+        if not chunk:
+          break
+        f.write(chunk)
